@@ -51,7 +51,7 @@ class _ListViewPageState extends State<ListViewPage> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: Text("weight 目录"),
+          title: Text("widget 目录"),
         ),
         body: Center(
           child: _buildListView3(),

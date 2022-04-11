@@ -8,24 +8,24 @@ class RouteWidget extends StatelessWidget {
     return MaterialApp(
       title: 'title',
       routes: {
-        "second_page": (Context) => SecondPage(),
-        "third_page": (Context) => ThirdPage(),
+        "second_page": (Context) => SecondPageRouter(),
+        "third_page": (Context) => ThirdPageRouter(),
       },
       onUnknownRoute: (RouteSettings setting) =>
           MaterialPageRoute(builder: (context) => UnknownPage()),
-      home: FirstPage(),
+      home: FirstPageRouter(),
     );
   }
 }
 
-class FirstPage extends StatefulWidget {
-  const FirstPage({Key? key}) : super(key: key);
+class FirstPageRouter extends StatefulWidget {
+  const FirstPageRouter({Key? key}) : super(key: key);
 
   @override
-  createState() => _FirstPageState();
+  createState() => _FirstPageRouterState();
 }
 
-class _FirstPageState extends State<FirstPage> {
+class _FirstPageRouterState extends State<FirstPageRouter> {
   String _msg='';
 
   @override
@@ -41,7 +41,7 @@ class _FirstPageState extends State<FirstPage> {
               onPressed: () =>
                   Navigator.push(context,
                       MaterialPageRoute(builder:
-                          (context) => SecondPage()
+                          (context) => SecondPageRouter()
                       )
                   )
           ),
@@ -67,8 +67,8 @@ class _FirstPageState extends State<FirstPage> {
   }
 }
 
-class SecondPage extends StatelessWidget {
-  const SecondPage({Key? key}) : super(key: key);
+class SecondPageRouter extends StatelessWidget {
+  const SecondPageRouter({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -102,8 +102,8 @@ class UnknownPage extends StatelessWidget {
 }
 
 
-class ThirdPage extends StatelessWidget {
-  const ThirdPage({Key? key}) : super(key: key);
+class ThirdPageRouter extends StatelessWidget {
+  const ThirdPageRouter({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
