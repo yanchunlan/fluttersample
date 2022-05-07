@@ -28,6 +28,13 @@ class MainActivity : FlutterActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate: ")
+
+        window.decorView.background = null
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LOW_PROFILE
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.statusBarColor = 0x00000000
+        }
+
         registerMethodChannel()
         registerMethodChannel1()
     }
