@@ -18,6 +18,7 @@ class NativeMethodLessWidget extends StatelessWidget {
               child: Text("打开应用商店"),
               onPressed: () {
                 platform.invokeMethod('openAppStore');
+                testGetBool();
                 testGetTime();
               })),
     );
@@ -35,5 +36,10 @@ class NativeMethodLessWidget extends StatelessWidget {
         print("TimeUtils.getStartTime().then map null");
       }
     });
+  }
+
+  void testGetBool() async {
+    dynamic value = await TimeUtils.isStartUpPref();
+    print("TimeUtils.testGetBool  $value");
   }
 }

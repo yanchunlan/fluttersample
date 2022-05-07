@@ -21,4 +21,7 @@ class TimeUtils{
   static Future<Map<dynamic, dynamic>?> getStartTime() async {
     return await mainMethodChannel.invokeMethod<Map<dynamic, dynamic>>('getStartTime');
   }
+  static Future<dynamic> isStartUpPref() async {
+    return await mainMethodChannel.invokeMethod<dynamic>('isStartUpPref');
+  }
 }

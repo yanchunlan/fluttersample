@@ -54,6 +54,10 @@ class MainActivity : FlutterActivity() {
                 } catch (e: Exception) {
                     result.error("UNAVAILABLE", "没有安装应用市场", null)
                 }
+            } else if (TimeRecordUtils.getInstance().isStartTime(call.method)) {
+                result.success(TimeRecordUtils.getInstance().startTime)
+            } else if (TimeRecordUtils.getInstance().isStartUpPref(call.method)) {
+                result.success(false)
             } else {
                 result.notImplemented()
             }
