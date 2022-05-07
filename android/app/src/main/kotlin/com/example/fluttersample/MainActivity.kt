@@ -1,10 +1,14 @@
 package com.example.fluttersample
 
+import android.annotation.SuppressLint
+import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -19,11 +23,44 @@ import io.flutter.plugins.GeneratedPluginRegistrant
 
 
 class MainActivity : FlutterActivity() {
+    private val TAG = "MainActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "onCreate: ")
         registerMethodChannel()
         registerMethodChannel1()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart: ")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume: ")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy: ")
+    }
+
+    @SuppressLint("MissingPermission")
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        Log.i(TAG, " onNewIntent")
+        if (intent.flags or Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT > 0) {
+            if (Build.VERSION.SDK_INT >= 19 && !isTaskRoot) {
+                val manager = getSystemService(ACTIVITY_SERVICE) as ActivityManager
+                manager.moveTaskToFront(taskId, ActivityManager.MOVE_TASK_NO_USER_ACTION)
+                Log.d(TAG, "onNewIntent moveTaskToFront")
+                if (!Utils.isRunningForeground(this@MainActivity)) {
+                    Utils.moveAppToFront(this@MainActivity)
+                }
+            }
+        }
     }
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
@@ -58,6 +95,9 @@ class MainActivity : FlutterActivity() {
                 result.success(TimeRecordUtils.getInstance().startTime)
             } else if (TimeRecordUtils.getInstance().isStartUpPref(call.method)) {
                 result.success(false)
+            } else if (TimeRecordUtils.getInstance().isJumpSecond(call.method)) {
+                IntentsUtils.showSecondActivity(this)
+                result.success(0)
             } else {
                 result.notImplemented()
             }

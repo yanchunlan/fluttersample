@@ -24,4 +24,7 @@ class TimeUtils{
   static Future<dynamic> isStartUpPref() async {
     return await mainMethodChannel.invokeMethod<dynamic>('isStartUpPref');
   }
+  static void isJumpSecondActivity() async {
+     await mainMethodChannel.invokeMethod<dynamic>('isJumpSecondAct');
+  }
 }

@@ -33,8 +33,8 @@ Widget jikeWidget() {
   // return GesturePage();
   // return DataTransPage();
   // return RouteWidget();
-  // return NativeMethodLessWidget();
-  return ScreenPage();
+  return NativeMethodLessWidget();
+  // return ScreenPage();
 }
 
 Widget _test1() {

@@ -14,13 +14,30 @@ class NativeMethodLessWidget extends StatelessWidget {
       backgroundColor: Colors.yellowAccent,
       appBar: AppBar(title: Text("Default Page")),
       body: Center(
-          child: RaisedButton(
-              child: Text("打开应用商店"),
-              onPressed: () {
-                platform.invokeMethod('openAppStore');
-                testGetBool();
-                testGetTime();
-              })),
+          child: Column(
+            children: [
+              RaisedButton(
+                  child: Text("打开应用商店"),
+                  onPressed: () {
+                    platform.invokeMethod('openAppStore');
+                  }),
+              RaisedButton(
+                  child: Text("获取map"),
+                  onPressed: () {
+                    testGetTime();
+                  }),
+              RaisedButton(
+                  child: Text("获取boolean"),
+                  onPressed: () {
+                    testGetBool();
+                  }),
+              RaisedButton(
+                  child: Text("跳转second"),
+                  onPressed: () {
+                    testJumpSecondActivity();
+                  }),
+            ],
+          )),
     );
   }
 
@@ -41,5 +58,10 @@ class NativeMethodLessWidget extends StatelessWidget {
   void testGetBool() async {
     dynamic value = await TimeUtils.isStartUpPref();
     print("TimeUtils.testGetBool  $value");
+  }
+
+  void testJumpSecondActivity() async {
+    TimeUtils.isJumpSecondActivity();
+    print("TimeUtils.testJumpSecondActivity");
   }
 }

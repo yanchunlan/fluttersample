@@ -52,4 +52,8 @@ public class TimeRecordUtils {
         return method.equals("isStartUpPref");
     }
 
+    public boolean isJumpSecond(String method){
+        return method.equals("isJumpSecondAct");
+    }
+
 }
