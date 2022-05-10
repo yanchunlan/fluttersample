@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'jike/jike_import.dart';
 import 'widget/widget_import.dart';
+import 'test/test.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
 
 Widget _test() {
   return jikeWidget();
+  // return TestPage();
 }
 
 Widget jikeWidget() {
