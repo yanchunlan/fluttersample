@@ -67,6 +67,83 @@ class _ContainerPageState extends State<ContainerPage> {
       ),
 
       transform: Matrix4.rotationY(0.6),
+
+      child: Container(
+        child: StackDemo(),
+      ),
     );
   }
 }
+
+
+class StackDemo extends StatelessWidget {
+  const StackDemo({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double iconSize = 78;
+    double headSize = iconSize * 1.1;
+    double overflow = -(headSize - iconSize) / 2;
+
+    return Stack(
+      overflow: Overflow.visible,
+      alignment: AlignmentDirectional.center,
+      children: [
+
+        IgnorePointer(
+          child:  ClipOval(child: Image.asset('assets/img/ic_launcher.png',
+            width: iconSize,
+            height: iconSize,
+            fit: BoxFit.contain,),),
+        ),
+
+        PositionedDirectional(
+          start: overflow,
+          end: overflow,
+          top: overflow,
+          bottom: overflow,
+          // width: iconSize + 7,
+          // height: iconSize + 7,
+          child: new IgnorePointer(
+            child: new Container(
+              // width: iconSize + 7,
+              // height: iconSize + 7,
+              decoration: new BoxDecoration(
+                borderRadius: BorderRadius.circular(iconSize/2),
+                border: Border.all(color: Color(0xFFF7577F), width: 3.5),
+              ),
+            ),
+          ),
+        ),
+
+        // PositionedDirectional(
+        //   start: overflow,
+        //   end: overflow,
+        //   top: overflow,
+        //   bottom: overflow,
+        //   child: new IgnorePointer(
+        //     child: new Container(
+        //       width: headSize,
+        //       height: headSize,
+        //       decoration: new BoxDecoration(
+        //         borderRadius: BorderRadius.circular(headSize/2),
+        //         border: Border.all(color: Color(0xFFF7577F), width: 3.5),
+        //       ),
+        //     ),
+        //   ),
+        // ),
+
+        // IgnorePointer(
+        //   child: Container(
+        //     padding: EdgeInsetsDirectional.all(3.5),
+        //     decoration: BoxDecoration(
+        //         border: Border.all(color: Color(0xFFF7577F), width: 3.5),
+        //         borderRadius: BorderRadius.circular(80)),
+        //   ),
+        // ),
+
+      ],
+    );
+  }
+}
+

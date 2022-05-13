@@ -18,15 +18,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: _test(),
+      home: _test1(),
     );
   }
 }
 
 
 Widget _test() {
-  return jikeWidget();
-  // return TestPage();
+  // return jikeWidget();
+  return TestPage();
 }
 
 Widget jikeWidget() {
@@ -46,6 +46,6 @@ Widget _test1() {
 Widget otherWidget() {
   // return ListViewPage();
   // return ScrollViewPage();
-  // return ContainerPage();
-  return ProgressPage();
+  return ContainerPage();
+  // return ProgressPage();
 }
