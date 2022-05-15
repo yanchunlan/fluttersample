@@ -22,7 +22,9 @@ dependencies:
   dio: 4.0.0
   http2: 1.0.1
   json_annotation: 4.1.0
-
+  path_provider: ^2.0.3
+  shared_preferences: ^2.0.7
+  sqflite:
 
 dev_dependencies:
   flutter_test:
