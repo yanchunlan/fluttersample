@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class GradientLinearProgressBar extends StatelessWidget {
 
-  final bool strokeCapRound;//是否需要圆角
-  final double strokeWidth;//画笔的宽度，其实是进度条的高度
-  final double value;//进度值
-  final Color backgroundColor;//进度条背景色
-  final List<Color>? colors;//渐变的颜色列表
+  final bool strokeCapRound; //是否需要圆角
+  final double strokeWidth; //画笔的宽度，其实是进度条的高度
+  final double value; //进度值
+  final Color backgroundColor; //进度条背景色
+  final List<Color>? colors; //渐变的颜色列表
 
   GradientLinearProgressBar({
     this.strokeCapRound = false,
@@ -20,11 +20,15 @@ class GradientLinearProgressBar extends StatelessWidget {
   Widget build(BuildContext context) {
     var _colors = colors;
     if (_colors == null) {
-      Color color = Theme.of(context).accentColor;
+      Color color = Theme
+          .of(context)
+          .accentColor;
       _colors = [color, color];
     }
     return CustomPaint(
-      size: MediaQuery.of(context).size,
+      size: MediaQuery
+          .of(context)
+          .size,
       painter: _GradientLinearProgressPainter(
           strokeWidth: strokeWidth,
           strokeCapRound: strokeCapRound,
@@ -36,7 +40,7 @@ class GradientLinearProgressBar extends StatelessWidget {
   }
 }
 
-class _GradientLinearProgressPainter extends CustomPainter{
+class _GradientLinearProgressPainter extends CustomPainter {
 
   final double strokeWidth;
   final bool strokeCapRound;
@@ -63,9 +67,9 @@ class _GradientLinearProgressPainter extends CustomPainter{
     p.isAntiAlias = true;
     p.strokeWidth = strokeWidth;
 
-    double _offset = strokeWidth / 2;//留一定的偏移量
-    var start = Offset(_offset, _offset);//画笔起点坐标
-    var end = Offset(size.width, _offset);//画笔终点坐标
+    double _offset = strokeWidth / 2; //留一定的偏移量
+    var start = Offset(_offset, _offset); //画笔起点坐标
+    var end = Offset(size.width, _offset); //画笔终点坐标
 
     // 画背景
     if (backgroundColor != Colors.transparent) {
@@ -75,15 +79,17 @@ class _GradientLinearProgressPainter extends CustomPainter{
 
     // 画进度条
     if (value > 0) {
-      var valueEnd = Offset(value * size.width + _offset, _offset);//计算进度的长度
+      var valueEnd = Offset(value * size.width + _offset, _offset); //计算进度的长度
       Rect rect = Rect.fromPoints(start, valueEnd);
-      p.shader = LinearGradient(colors: colors, stops: stops).createShader(rect);
-      // p.color = Colors.amber;
-      canvas.drawLine(start, valueEnd, p);
+      p.shader = LinearGradient(colors: colors, stops: stops).createShader(
+          rect, textDirection: TextDirection.ltr);
+          // p.color = Colors.amber;
+          canvas.drawLine(start, valueEnd, p);
     }
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => oldDelegate !=this;
+  bool shouldRepaint(covariant CustomPainter oldDelegate) =>
+      oldDelegate != this;
 
 }

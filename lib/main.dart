@@ -18,15 +18,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: _test1(),
+      home: _test(),
     );
   }
 }
 
 
 Widget _test() {
-  // return jikeWidget();
-  return TestPage();
+  return jikeWidget();
+  // return TestPage();
 }
 
 Widget jikeWidget() {
@@ -35,8 +35,10 @@ Widget jikeWidget() {
   // return GesturePage();
   // return DataTransPage();
   // return RouteWidget();
+  // return AnimationPage();
+  return NetworkPage();
   // return NativeMethodLessWidget();
-  return ScreenPage();
+  // return ScreenPage();
 }
 
 Widget _test1() {
