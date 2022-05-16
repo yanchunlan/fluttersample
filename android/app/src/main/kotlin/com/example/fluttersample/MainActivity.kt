@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import kotlin.random.Random
 import android.view.View
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
@@ -98,8 +99,7 @@ class MainActivity : FlutterActivity() {
 
         override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {
             if (call.method.equals("changeBackgroundColor")) {
-                view.setBackgroundColor(Color.rgb(0, 0, 255));
-
+                view.setBackgroundColor(Color.rgb(Random.nextInt(255), Random.nextInt(255), Random.nextInt(255)));
 
                 result.success(0);
             } else {

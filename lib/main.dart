@@ -36,9 +36,10 @@ Widget jikeWidget() {
   // return DataTransPage();
   // return RouteWidget();
   // return AnimationPage();
-  return NetworkPage();
+  // return NetworkPage();
   // return PersistencePage();
   // return NativeMethodLessWidget();
+  return NativeViewPage();
   // return ScreenPage();
 }
 
