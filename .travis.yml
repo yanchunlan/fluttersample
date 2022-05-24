@@ -1,0 +1,141 @@
+##.travis.yml 持续集成
+#
+## 1. 添加持续集成
+#language: dart
+##script:
+##  # 编译命令
+##  - dart main.dart
+##  # 自动化测试命令
+#
+#
+## 2. 配置flutter运行环境
+##  os:
+##    - osx
+##  install:
+##    - git clone https://github.com/flutter/flutter.git
+##    - export PATH="$PATH:`pwd`/flutter/bin"
+##  script:
+##    - flutter doctor && flutter test
+#
+#
+## 3. 使用 matrix 分拆构建任务【iOS 平台构建出 ipa 包、Android 平台构建出 apk 包】
+#matrix:
+#  include:
+#    #声明Android运行环境
+#    - os: linux
+#      language: android
+#      dist: trusty
+#      licenses:
+#        - 'android-sdk-preview-license-.+'
+#        - 'android-sdk-license-.+'
+#        - 'google-gdk-license-.+'
+#      #声明需要安装的Android组件
+#      android:
+#        components:
+#          - tools
+#          - platform-tools
+#          - build-tools-28.0.3
+#          - android-28
+#          - sys-img-armeabi-v7a-google_apis-28
+#          - extra-android-m2repository
+#          - extra-google-m2repository
+#          - extra-google-android-support
+#      jdk: oraclejdk8
+#      sudo: false
+#      addons:
+#        apt:
+#          sources:
+#            - ubuntu-toolchain-r-test
+#          packages:
+#            - libstdc++6
+#            - fonts-droid
+#      #确保sdkmanager是最新的
+#      before_script:
+#        - yes | sdkmanager --update
+#      script:
+#        - yes | flutter doctor --android-licenses
+#        - flutter doctor && flutter -v build apk
+#
+#    #声明iOS的运行环境
+#    - os: osx
+#      language: objective-c
+#      osx_image: xcode10.2
+#      script:
+#        - flutter doctor && flutter -v build ios --no-codesign
+#install:
+#  - git clone https://github.com/flutter/flutter.git
+#  - export PATH="$PATH:`pwd`/flutter/bin"
+#
+#
+## 4. 不清除产物，并自动发布到github
+## 声明构建需要执行的命令
+#script:
+#  - yes | flutter doctor --android-licenses
+#  - flutter doctor && flutter -v build apk
+##声明部署的策略，即上传apk至github release
+#deploy:
+#  provider: releases
+#  api_key: ${GITHUB_TOKEN}
+#  file:
+#    - build/app/outputs/apk/release/app-release.apk
+#  # skip_cleanup 不要清除编译产物
+#  skip_cleanup: true
+#  on:
+#    tags: true
+#
+#
+## 5. ios的包ipa，需要通过 before_deploy 字段修改构建产物
+#...
+##对发布前的构建产物进行预处理，打包成ipa
+#before_deploy:
+#  - mkdir app && mkdir app/Payload
+#  - cp -r build/ios/iphoneos/Runner.app app/Payload
+#  - pushd app && zip -r -m app.ipa Payload  && popd
+##将ipa上传至github release
+#deploy:
+#  provider: releases
+#  api_key: ${GITHUB_TOKEN}
+#  file:
+#    - app/app.ipa
+#  skip_cleanup: true
+#  on:
+#    tags: true
+#
+#
+## 6. 组建打包
+##...
+###对构建产物进行预处理，压缩成zip格式的组件
+##before_deploy:
+##  - mkdir .ios/Outputs && mkdir .ios/Outputs/FlutterEngine
+##  - cp FlutterEngine.podspec .ios/Outputs/
+##  - cp -r .ios/Flutter/App.framework/ .ios/Outputs/FlutterEngine/App.framework/
+##  - cp -r .ios/Flutter/engine/Flutter.framework/ .ios/Outputs/FlutterEngine/Flutter.framework/
+##  - pushd .ios/Outputs && zip -r FlutterEngine.zip  ./ && popd
+##deploy:
+##  provider: releases
+##  api_key: ${GITHUB_TOKEN}
+##  file:
+##    - .ios/Outputs/FlutterEngine.zip
+##  skip_cleanup: true
+##  on:
+##    tags: true
+
+
+###########  sample 1 ################
+language: dart
+script:
+  - dart bin/test/travis.dart
+after_success:
+  - echo "success"
+after_script:
+  - echo "after_script"
+after_deploy:
+  - echo 'after_deploy'
+deploy:
+  provider: script
+  script: echo 'deploy'
+
+###########  sample 2 ################
+
+
+###########  sample 3 ################
