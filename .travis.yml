@@ -122,6 +122,7 @@
 
 
 ###########  sample 1 ################
+# .travis.yml 持续集成简单集成
 #language: dart
 #script:
 #  - dart bin/test/travis.dart
@@ -136,9 +137,87 @@
 #  script: echo 'deploy'
 
 ###########  sample 2 ################
+# android 与 ios 环境配置与打包 【组建】
+#matrix:
+#  include:
+#    # 声明android的运行环境
+#    - os: linux
+#      language: android
+#      dist: trusty
+#      licenses:
+#        - 'android-sdk-preview-license-.+'
+#        - 'android-sdk-license-.+'
+#        - 'google-gdk-license-.+'
+#      android:
+#        components:
+#          - tools
+#          - platform-tools
+#          - build-tools-29.0.3
+#          - android-29
+#          - sys-img-armeabi-v7a-google_apis-29
+#          - extra-android-m2repository
+#          - extra-google-m2repository
+#          - extra-google-android-support
+#      jdk: oraclejdk8
+#      sudo: false
+#      addons:
+#        apt:
+#          # Flutter depends on /usr/lib/x86_64-linux-gnu/libstdc++.so.6 version GLIBCXX_3.4.18
+#          sources:
+#            - ubuntu-toolchain-r-test # if we don't specify this, the libstdc++6 we get is the wrong version
+#          packages:
+#            - libstdc++6
+#            - fonts-droid
+#      before_script:
+#        - yes | sdkmanager --update
+#      script:
+#        - yes | flutter doctor --android-licenses
+#        - flutter doctor && flutter -v build apk
+#      # android产物配置，不清除产物
+#      deploy:
+#        provider: releases
+#        api_key: ${GITHUB_TOKEN}
+#        file:
+#          - .android/Flutter/build/outputs/aar/flutter-release.aar
+#        skip_cleanup: true
+#        on:
+#          tags: true
+#    #声明iOS的运行环境
+#    - os: osx
+#      language: objective-c
+#      osx_image: xcode10.2
+#      before_script:
+#        - pod repo update
+#      script:
+#        - flutter doctor && flutter -v build ios --no-codesign
+#      # 对构建产物进行预处理，压缩成zip格式的组件，组建打包
+#      before_deploy:
+#        - mkdir .ios/Outputs && mkdir .ios/Outputs/FlutterEngine
+#        - cp FlutterEngine.podspec .ios/Outputs/
+#        - cp -r .ios/Flutter/App.framework/ .ios/Outputs/FlutterEngine/App.framework/
+#        - cp -r .ios/Flutter/engine/Flutter.framework/ .ios/Outputs/FlutterEngine/Flutter.framework/
+#        - pushd .ios/Outputs && zip -r FlutterEngine.zip  ./ && popd
+#      # ios产物配置，不清除产物
+#      deploy:
+#        provider: releases
+#        api_key: ${GITHUB_TOKEN}
+#        file:
+#          - .ios/Outputs/FlutterEngine.zip
+#        skip_cleanup: true
+#        on:
+#          tags: true
+#  # 声明flutter的运行环境
+#before_install:
+#  - git clone -b 'v2.10.2' --depth 1 https://github.com/flutter/flutter.git
+#  - export PATH="$PATH:`pwd`/flutter/bin"
+#cache:
+#  directories:
+#    - $HOME/.pub-cache
+
+###########  sample 3 ################
+# android 与 ios 环境配置与打包
 matrix:
   include:
-    # 声明android的运行环境
     - os: linux
       language: android
       dist: trusty
@@ -171,16 +250,15 @@ matrix:
       script:
         - yes | flutter doctor --android-licenses
         - flutter doctor && flutter -v build apk
-      # android产物配置，不清除产物
       deploy:
         provider: releases
         api_key: ${GITHUB_TOKEN}
         file:
-          - .android/Flutter/build/outputs/aar/flutter-release.aar
+          - build/app/outputs/apk/release/app-release.apk
         skip_cleanup: true
         on:
           tags: true
-    #声明iOS的运行环境
+
     - os: osx
       language: objective-c
       osx_image: xcode10.2
@@ -188,28 +266,21 @@ matrix:
         - pod repo update
       script:
         - flutter doctor && flutter -v build ios --no-codesign
-      # 对构建产物进行预处理，压缩成zip格式的组件，组建打包
       before_deploy:
-        - mkdir .ios/Outputs && mkdir .ios/Outputs/FlutterEngine
-        - cp FlutterEngine.podspec .ios/Outputs/
-        - cp -r .ios/Flutter/App.framework/ .ios/Outputs/FlutterEngine/App.framework/
-        - cp -r .ios/Flutter/engine/Flutter.framework/ .ios/Outputs/FlutterEngine/Flutter.framework/
-        - pushd .ios/Outputs && zip -r FlutterEngine.zip  ./ && popd
-      # ios产物配置，不清除产物
+        - mkdir app && mkdir app/Payload
+        - cp -r build/ios/iphoneos/Runner.app app/Payload
+        - pushd app && zip -r -m app.ipa Payload  && popd
       deploy:
         provider: releases
         api_key: ${GITHUB_TOKEN}
         file:
-          - .ios/Outputs/FlutterEngine.zip
+          - app/app.ipa
         skip_cleanup: true
         on:
           tags: true
-  # 声明flutter的运行环境
-before_install:
+install:
   - git clone -b 'v2.10.2' --depth 1 https://github.com/flutter/flutter.git
   - export PATH="$PATH:`pwd`/flutter/bin"
 cache:
   directories:
     - $HOME/.pub-cache
-
-###########  sample 3 ################
