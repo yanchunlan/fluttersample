@@ -36,9 +36,9 @@ Widget _widgetForRoute() {
       return MaterialApp(
         theme: ThemeData(
             pageTransitionsTheme: PageTransitionsTheme(builders: {
-          TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-        })),
+              TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+              TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+            })),
         home: Scaffold(
           backgroundColor: Colors.red,
           body: Center(
