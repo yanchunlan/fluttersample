@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
+import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
+import 'default_page.dart';
 
-void main() => runApp(Module_a_test()); //独立运行传入默认路由
-
-
-class Module_a_test extends StatelessWidget {
-  const Module_a_test({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return _widgetForRoute();
-  }
-}
+void main() => runApp(_widgetForRoute()); //独立运行传入默认路由
 
 Widget _widgetForRoute() {
   String route = window.defaultRouteName;
@@ -31,7 +24,7 @@ Widget _widgetForRoute() {
           ),
         ),
       );
-    default:
+    case '/':
       return MaterialApp(
         home: Scaffold(
           backgroundColor: Colors.red,
@@ -40,6 +33,15 @@ Widget _widgetForRoute() {
                 textDirection: TextDirection.ltr),
           ),
         ),
+      );
+    default:
+      return MaterialApp(
+        theme: ThemeData(
+            pageTransitionsTheme: PageTransitionsTheme(builders: {
+              TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+              TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+            })),
+        home: DefaultPage(),
       );
   }
 }

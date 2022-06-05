@@ -6,6 +6,8 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import io.flutter.embedding.android.FlutterActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -15,8 +17,18 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onToFlutterClick(View view) {
+    public void onToFlutter1Click(View view) {
         Intent intent = new Intent(this, MyFlutterActivity.class);
         startActivity(intent);
+    }
+
+    public void onToFlutter2Click(View view) {
+        Intent intent = new Intent(this, MyFlutterActivity2.class);
+        startActivity(intent);
+    }
+
+    public void onToFlutter3Click(View view) {
+//        startActivity(FlutterActivity.createDefaultIntent(this));
+        startActivity(FlutterActivity.withNewEngine().initialRoute("route2").build(this));
     }
 }

@@ -16,6 +16,7 @@ import io.flutter.embedding.android.FlutterView;
 import io.flutter.embedding.engine.FlutterEngine;
 import io.flutter.embedding.engine.FlutterEngineCache;
 import io.flutter.embedding.engine.dart.DartExecutor;
+import io.flutter.embedding.engine.renderer.FlutterUiDisplayListener;
 import io.flutter.plugin.common.MethodChannel;
 
 public class MyFlutterActivity2 extends AppCompatActivity {
@@ -91,9 +92,11 @@ public class MyFlutterActivity2 extends AppCompatActivity {
 
     private FlutterView createFlutterView() {
         FlutterView flutterView = new FlutterView(this);
+        flutterView.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_orange_light));
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                300,
-                300);
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+
         LinearLayout layout = findViewById(R.id.id_main);
         layout.setBackgroundColor(ContextCompat.getColor(this, android.R.color.holo_green_light));
         layout.addView(flutterView,params);
@@ -108,7 +111,7 @@ public class MyFlutterActivity2 extends AppCompatActivity {
         );
         FlutterEngineCache
                 .getInstance()
-                .put("my_engine_id", flutterEngine);
+                .put("default_engine", flutterEngine);
         return flutterEngine;
     }
 

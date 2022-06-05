@@ -16,12 +16,28 @@
         />
 
     <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="toFlutter1Act"
+        android:textAllCaps="false"
+        android:onClick="onToFlutter1Click"
+        />
+   <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="toFlutter"
+        android:text="toFlutter2Act"
         android:textAllCaps="false"
-        android:onClick="onToFlutterClick"
+        android:onClick="onToFlutter2Click"
+        />
+   <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="toFlutter3Act"
+        android:textAllCaps="false"
+        android:onClick="onToFlutter3Click"
         />
 
 </LinearLayout>

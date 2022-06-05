@@ -14,12 +14,26 @@
         android:text="nativeActivity" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
-        android:text="toFlutter"
-        android:onClick="onToFlutterClick"/>
+        android:text="toFlutter1Act"
+        android:onClick="onToFlutter1Click"/>
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="toFlutter2Act"
+        android:onClick="onToFlutter2Click"/>
+   <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="toFlutter3Act"
+        android:onClick="onToFlutter3Click"/>
 
 
 </LinearLayout>
