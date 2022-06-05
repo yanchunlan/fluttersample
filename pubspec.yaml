@@ -9,10 +9,12 @@ environment:
   sdk: ">=2.13.4 <3.0.0"
 
 dependencies:
-  flutter_localizations:
+  flutter_localizations: #多语言
     sdk: flutter
+
   flutter:
     sdk: flutter
+
   cupertino_icons: ^1.0.2  #ios Icons
   cached_network_image: ^3.0.0-nullsafety
   fluttertoast: ^8.0.7
@@ -25,6 +27,13 @@ dependencies:
   path_provider: ^2.0.3
   shared_preferences: ^2.0.7
   sqflite:
+  provider: ^5.0.0
+
+
+#解决依赖冲突
+dependency_overrides:
+  archive: 3.0.0
+  crypto: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -38,3 +47,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/img/
+
+# 多语言插件
+flutter_intl:
+  enabled: true

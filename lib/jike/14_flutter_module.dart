@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
+import 'dart:ui';
 // module_a
 
 void main() {
@@ -53,7 +55,7 @@ Widget _widgetForRoute() {
 const methodChannel = MethodChannel('example.native_method/navigation');
 
 class PageA extends StatelessWidget {
-  PageA({Key key}) : super(key: key);
+  PageA({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +84,7 @@ class PageA extends StatelessWidget {
 }
 
 class DefaultPage extends StatelessWidget {
-  DefaultPage({Key key}) : super(key: key);
+  DefaultPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

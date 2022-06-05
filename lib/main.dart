@@ -4,6 +4,7 @@ import 'jike/jike_import.dart';
 import 'widget/widget_import.dart';
 import 'test/test.dart';
 
+
 void main() {
   runApp(const MyApp());
 }
@@ -39,7 +40,8 @@ Widget jikeWidget() {
   // return NetworkPage();
   // return PersistencePage();
   // return NativeMethodLessWidget();
-  return NativeViewPage();
+  // return NativeViewPage();
+  return ProviderPage();
   // return ScreenPage();
 }
 

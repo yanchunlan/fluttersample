@@ -1,20 +1,12 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter/services.dart';
+import 'package:flutter/foundation.dart';
+import 'dart:ui';
 // module_a
 
 void main() {
-  runApp(const Module_a_test());
+  runApp(_widgetForRoute());
 }
-
-class Module_a_test extends StatelessWidget {
-  const Module_a_test({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return _widgetForRoute();
-  }
-}
-
 
 Widget _widgetForRoute() {
   String route = window.defaultRouteName;
