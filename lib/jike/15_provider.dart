@@ -16,33 +16,34 @@ class ProviderPage extends StatelessWidget {
         ChangeNotifierProvider<CounterModel>(
           create: (_) => CounterModel(),
         ),
-        // ChangeNotifierProvider.value(value: CounterModel()),
+        // ChangeNotifierProvider.value(value: CounterModel()), // 尽可能少使用.value的方法
       ],
-      child: DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          body: TabBarView(
-            children: [
-              ConsumerTabPage1(),
-              ProviderTabPage1(),
-            ],
-          ),
-          bottomNavigationBar: TabBar(
-            tabs: [
-              Tab(
-                icon: Icon(Icons.home),
-                text: "Consumer",
-              ),
-              Tab(
-                icon: Icon(Icons.rss_feed),
-                text: "Provider",
-              ),
-            ],
-            unselectedLabelColor: Colors.blueGrey,
-            labelColor: Colors.blue,
-            indicatorSize: TabBarIndicatorSize.label,
-            indicatorColor: Colors.red,
-          ),
+      child: HomePage(),
+    );
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        body: TabBarView(
+          children: [
+            ConsumerTabPage1(),
+            ProviderTabPage1(),
+          ],
+        ),
+        bottomNavigationBar: TabBar(
+          tabs: [
+            Tab(icon: Icon(Icons.home),text: "Consumer",),
+            Tab(icon: Icon(Icons.rss_feed),text: "Provider",),
+          ],
+          unselectedLabelColor: Colors.blueGrey,
+          labelColor: Colors.blue,
+          indicatorSize: TabBarIndicatorSize.label,
+          indicatorColor: Colors.red,
         ),
       ),
     );
@@ -87,27 +88,25 @@ class ConsumerTabPage1 extends StatelessWidget {
 }
 
 class ConsumerTabPage2 extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
-    final _counter = Provider.of<CounterModel>(context, listen: false);
-    final textSize = Provider.of<double>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text('Second Page'),
       ),
-      body: Text('Counter: ${_counter.counter}',
-          style: TextStyle(fontSize: textSize)),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _counter.addCounter(),
+      body: Consumer2<CounterModel,double>(
+          builder: (context, CounterModel counter, double textSize, _) => Text(
+              'Counter: ${counter.counter}',
+              style: TextStyle(fontSize: textSize))
+      ),
+      floatingActionButton: Consumer<CounterModel>(
+        builder: (context, CounterModel counter, child) => FloatingActionButton(
+          onPressed: counter.addCounter,
+          child: child,
+        ),
         child: Icon(Icons.add),
       ),
-      // floatingActionButton: Consumer<CounterModel>(
-      //   builder: (context, CounterModel counter, child) => FloatingActionButton(
-      //     onPressed: () => counter.addCounter(),
-      //     child: child,
-      //   ),
-      //   child: Icon(Icons.add),
-      // ),
     );
   }
 }
@@ -117,8 +116,8 @@ class ConsumerTabPage2 extends StatelessWidget {
 class ProviderTabPage1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final _counter = Provider.of<CounterModel>(context);
-    final textSize = Provider.of<double>(context);
+    final _counter = Provider.of<CounterModel>(context,listen: false);
+    final textSize = Provider.of<double>(context,listen: false);
     return Scaffold(
       appBar: AppBar(
         title: Text('First Page'),
@@ -131,7 +130,7 @@ class ProviderTabPage1 extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => ProviderTabPage2())),
+            .push(MaterialPageRoute(builder: (context) => ProviderTabPage2(_counter,textSize))),
         child: Icon(Icons.navigate_next),
       ),
     );
@@ -139,11 +138,13 @@ class ProviderTabPage1 extends StatelessWidget {
 }
 
 class ProviderTabPage2 extends StatelessWidget {
+  CounterModel _counter;
+  double textSize;
+
+  ProviderTabPage2(this._counter, this.textSize);
+
   @override
   Widget build(BuildContext context) {
-    final _counter = Provider.of<CounterModel>(context);
-    final textSize = Provider.of<double>(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Second Page'),

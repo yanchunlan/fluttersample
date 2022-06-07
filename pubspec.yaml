@@ -32,8 +32,9 @@ dependencies:
 
 #解决依赖冲突
 dependency_overrides:
-  archive: 3.0.0
-  crypto: ^3.0.0
+  archive: ^3.3.0
+  crypto: ^3.0.2
+  meta: ^1.8.0
 
 dev_dependencies:
   flutter_test:
