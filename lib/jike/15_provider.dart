@@ -5,6 +5,10 @@ import 'package:flutter/services.dart';
 import 'dart:ui';
 
 
+/**
+ * 每个局部provider跟context绑定，需要等待树构建完成之后，才可以获取数据
+ * 其原理是InheritedWidget
+ */
 class ProviderPage extends StatelessWidget {
   const ProviderPage({Key? key}) : super(key: key);
 
