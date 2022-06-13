@@ -40,6 +40,7 @@ class _CustomProviderPageState extends State<CustomProviderPage> {
 
 // ---------------------- 自定义provider ------------------------
 
+// 真正的控件
 class ProviderInheritedWidget<T> extends InheritedWidget {
   final T data;
   final Widget child;
@@ -85,7 +86,7 @@ class CountModel extends NotifyModel {
   }
 }
 
-
+// 实际操作类
 class ModelProviderWidget<T extends NotifyModel> extends StatefulWidget {
   final T data;
   final Widget child;
@@ -140,6 +141,7 @@ class _ModelProviderWidgetState<T extends NotifyModel>
   }
 }
 
+// 获取数据操作类
 class Consumer<T> extends StatelessWidget {
   final Widget Function(BuildContext context, T value) builder;
 
