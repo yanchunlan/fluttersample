@@ -29,6 +29,10 @@ dependencies:
   sqflite:
   provider: ^5.0.0
 
+  convert: ^3.0.2
+  crypto: ^3.0.2 # md5加密
+
+
 
 #解决依赖冲突
 dependency_overrides:
