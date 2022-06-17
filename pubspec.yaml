@@ -28,9 +28,13 @@ dependencies:
   shared_preferences: ^2.0.7
   sqflite:
   provider: ^5.0.0
-
   convert: ^3.0.2
   crypto: ^3.0.2 # md5加密
+
+
+  # 其他
+  # 系统通知插件
+  flutter_local_notifications: ^9.1.5
 
 
 

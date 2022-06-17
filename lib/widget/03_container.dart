@@ -18,7 +18,12 @@ class _ContainerPageState extends State<ContainerPage> {
           ),
           backgroundColor: Colors.lightBlue,
         ),
-        body: _container(),
+        body: Column(
+          children: [
+            _container(),
+            createWidgetSpan(),
+          ],
+        ),
       ),
     );
   }
@@ -27,8 +32,8 @@ class _ContainerPageState extends State<ContainerPage> {
     return Container(
       // constraints 改变Container 的属性
       constraints: BoxConstraints.expand(
-        width: 200,
-        height: 200,
+        width: 300,
+        height: 300,
       ),
       // 在这里尝试 Container 属性效果
       // color: Colors.lightBlue,
@@ -75,7 +80,6 @@ class _ContainerPageState extends State<ContainerPage> {
   }
 }
 
-
 class StackDemo extends StatelessWidget {
   const StackDemo({Key? key}) : super(key: key);
 
@@ -89,12 +93,15 @@ class StackDemo extends StatelessWidget {
       overflow: Overflow.visible,
       alignment: AlignmentDirectional.center,
       children: [
-
         IgnorePointer(
-          child:  ClipOval(child: Image.asset('assets/img/ic_launcher.png',
-            width: iconSize,
-            height: iconSize,
-            fit: BoxFit.contain,),),
+          child: ClipOval(
+            child: Image.asset(
+              'assets/img/ic_launcher.png',
+              width: iconSize,
+              height: iconSize,
+              fit: BoxFit.contain,
+            ),
+          ),
         ),
 
         PositionedDirectional(
@@ -109,7 +116,7 @@ class StackDemo extends StatelessWidget {
               // width: iconSize + 7,
               // height: iconSize + 7,
               decoration: new BoxDecoration(
-                borderRadius: BorderRadius.circular(iconSize/2),
+                borderRadius: BorderRadius.circular(iconSize / 2),
                 border: Border.all(color: Color(0xFFF7577F), width: 3.5),
               ),
             ),
@@ -141,9 +148,37 @@ class StackDemo extends StatelessWidget {
         //         borderRadius: BorderRadius.circular(80)),
         //   ),
         // ),
-
       ],
     );
   }
 }
 
+// 图文混排
+Widget createWidgetSpan() {
+  Widget textSpan = Text.rich(TextSpan(
+    children: <InlineSpan>[
+      TextSpan(text: 'Flutter is'),
+      WidgetSpan(
+          child: SizedBox(
+        width: 120,
+        height: 50,
+        child: Card(
+            color: Colors.blue, child: Center(child: Text('Hello World!'))),
+      )),
+      WidgetSpan(
+          child: SizedBox(
+        width: 60,
+        height: 60,
+        child: new Image.asset(
+          'assets/img/ic_launcher.png',
+          fit: BoxFit.cover,
+        ),
+      )),
+      TextSpan(text: 'the best!'),
+    ],
+  ));
+  return Padding(
+    padding: EdgeInsetsDirectional.only(top: 10.0),
+    child: textSpan,
+  );
+}
