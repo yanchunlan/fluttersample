@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: _test1(),
+      home: _test(),
     );
   }
 }
@@ -41,8 +41,9 @@ Widget jikeWidget() {
   // return PersistencePage();
   // return NativeMethodLessWidget();
   // return NativeViewPage();
-  return ProviderPage();
+  // return ProviderPage();
   // return ScreenPage();
+  return LogPage();
 }
 
 Widget _test1() {

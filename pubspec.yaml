@@ -31,6 +31,13 @@ dependencies:
   convert: ^3.0.2
   crypto: ^3.0.2 # md5加密
 
+  logger: ^1.1.0
+  dog: ^1.4.0
+
+  # 简易bugly插件
+  flutter_crash_plugin:
+    git:
+      url: https://github.com/cyndibaby905/39_flutter_crash_plugin.git
 
   # 其他
   # 系统通知插件

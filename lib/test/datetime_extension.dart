@@ -1,6 +1,8 @@
 import 'package:intl/intl.dart' as Date;
 
-
+/**
+ * 拓展类
+ */
 extension DateTimeExt on DateTime {
   /// 2020-02-02 02:02:02
   String toyyyyMMddHHmmss() {

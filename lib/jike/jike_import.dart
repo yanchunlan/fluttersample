@@ -1,3 +1,4 @@
+library sample_jike;
 
 export '00_common.dart';
 export '01_lifecycle.dart';
@@ -23,5 +24,7 @@ export '18_screen.dart';
 // export '19_multi_env.dart';
 // export '19_multi_env_main.dart';
 // export '19_multi_env_main_dev.dart';
-// export '20_performance.dart';
+export '20_log.dart';
+// export '21_crash.dart';
+// export '22_performance.dart';
 

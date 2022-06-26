@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/foundation.dart';
-import 'package:fluttersample/utils/timeUtils.dart';
+import '../utils/timeUtils.dart';
 
 const platform = MethodChannel('example.native_method/navigation');
 
