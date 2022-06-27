@@ -28,8 +28,7 @@ void main() {
 
 
 Future<Null> _reportError(dynamic error, dynamic stackTrace) async {
-  print('Caught error: $error');
-  print('Reporting to Bugly...');
+  print('_reportError $error stackTrace $stackTrace');
   FlutterCrashPlugin.postException(error, stackTrace);
 }
 
@@ -39,9 +38,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (Platform.isAndroid) {
-      FlutterCrashPlugin.setUp('43eed8b173');
+      FlutterCrashPlugin.setUp('219c1d46ab');
     } else if (Platform.isIOS) {
-      FlutterCrashPlugin.setUp('088aebe0d5');
+      FlutterCrashPlugin.setUp('219c1d46ab');
     }
 
     return MaterialApp(
