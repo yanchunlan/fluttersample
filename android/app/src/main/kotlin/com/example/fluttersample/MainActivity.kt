@@ -35,6 +35,7 @@ class MainActivity : FlutterActivity() {
     private fun registerMethodChannel1() {
         val registrar = ShimPluginRegistry(flutterEngine!!)
             .registrarFor("example.native_method/NativeViews")
+        if(registrar == null || registrar.messenger() == null) return;
         val playerViewFactory = SampleViewFactory(registrar.messenger())
         registrar.platformViewRegistry().registerViewFactory("SampleView", playerViewFactory)
     }
