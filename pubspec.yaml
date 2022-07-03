@@ -34,10 +34,9 @@ dependencies:
   logger: ^1.1.0
   dog: ^1.4.0
 
-  # 简易bugly插件
-  flutter_crash_plugin:
-    git:
-      url: https://github.com/cyndibaby905/39_flutter_crash_plugin.git
+  # 建议bugly插件
+  crash:
+    path: ./plugin/crash
 
   # 其他
   # 系统通知插件

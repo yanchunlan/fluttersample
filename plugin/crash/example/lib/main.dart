@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'dart:async';
 import 'package:crash/crash.dart';
 import 'dart:io';
 
 void main() {
+
   FlutterError.onError = (FlutterErrorDetails details) {
     Zone.current
         .handleUncaughtError(details.exception, details.stack ?? StackTrace.empty);
@@ -15,8 +16,8 @@ void main() {
     {
       return Scaffold(
           body: Center(
-        child: Text("Custom Error Widget"),
-      ));
+            child: Text("Custom Error Widget"),
+          ));
     }
   };
 
@@ -32,39 +33,23 @@ Future<Null> _reportError(dynamic error, dynamic stackTrace) async {
   Crash.postException(error, stackTrace);
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'CrashPage Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: CrashPage(),
-    );
-  }
+  State<MyApp> createState() => _MyAppState();
 }
 
-class CrashPage extends StatefulWidget {
-  const CrashPage({Key? key}) : super(key: key);
-
-  @override
-  State<CrashPage> createState() => _CrashPageState();
-}
-
-class _CrashPageState extends State<CrashPage> {
-
+class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
-
 
   @override
   void initState() {
     super.initState();
-    initCrash();
     initPlatformState();
+    initCrash();
   }
+
 
   void initCrash() {
     if(Platform.isAndroid){
@@ -73,6 +58,7 @@ class _CrashPageState extends State<CrashPage> {
       Crash.setUp('219c1d46ab');
     }
   }
+
 
   Future<void> initPlatformState() async {
     String platformVersion;
@@ -92,17 +78,15 @@ class _CrashPageState extends State<CrashPage> {
 
   @override
   Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('Plugin example app'),
+        ),
+        body: Column(
+          children: [
+            Text('Running on: $_platformVersion\n'),
 
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('CrashPage'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text('platformVersion $_platformVersion'),
             RaisedButton(
               child: Text('Dart exception'),
               elevation: 1.0,
@@ -110,23 +94,26 @@ class _CrashPageState extends State<CrashPage> {
                 throw StateError('This is a Dart exception.');
               },
             ),
-            new RaisedButton(
+
+            RaisedButton(
               child: Text('async Dart exception'),
               elevation: 1.0,
-              onPressed: () {
-                try {
-                  Future.delayed(Duration(seconds: 1)).then((e) =>
-                      throw StateError('This is a Dart exception in Future.'));
-                } catch (e) {
-                  print("This line will never be executed. ");
+              onPressed: () async {
+                foo() async {
+                  throw StateError('This is an async Dart exception.');
                 }
+                bar() async {
+                  await foo();
+                }
+                await bar();
               },
             ),
+
+
           ],
         ),
       ),
     );
   }
-
 
 }
