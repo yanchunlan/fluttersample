@@ -54,8 +54,9 @@ class BaseObserver extends NavigatorObserver{
 
 }
 
-// 页面异常
+// 页面异常率
 double pageException(){
   if(totalPV == 0) return 0;
+  print('exceptionCount $exceptionCount totalPV $totalPV');
   return exceptionCount/totalPV;
 }

@@ -19,6 +19,8 @@ void main() async {
 
     // originalCallback = window.onReportTimings;
     // window.onReportTimings = onReportTimings;
+    // 1.12.x 后fps需要改为下面方式获取
+    startFpsListener();
 
   }, onError: (error, stackTrace) async {
     //拦截异常
@@ -64,7 +66,9 @@ class _PerformancePage2State extends State<PerformancePage2> {
   void initState() {
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       widget.endTime = DateTime.now().millisecondsSinceEpoch;
+      // 页面加载时长
       int timeSpend = widget.endTime - widget.startTime;
+
       print("PerformancePage2 render time:${timeSpend} ms");
     });
   }
@@ -92,7 +96,7 @@ class _PerformancePage2State extends State<PerformancePage2> {
               '$_counter',
               style: Theme.of(context).textTheme.displayMedium,
             ),
-
+            Text('pageException: ${pageException()}'),
 
             RaisedButton(
               child: Text('Dart exception'),
@@ -101,20 +105,18 @@ class _PerformancePage2State extends State<PerformancePage2> {
                 throw StateError('This is a Dart exception.');
               },
             ),
-
             new RaisedButton(
               child: Text('async Dart exception'),
               elevation: 1.0,
               onPressed: () {
                 try {
                   Future.delayed(Duration(seconds: 1)).then((e) =>
-                  throw StateError('This is a Dart exception in Future.'));
+                      throw StateError('This is a Dart exception in Future.'));
                 } catch (e) {
                   print("This line will never be executed. ");
                 }
               },
             ),
-
           ],
         ),
       ),
