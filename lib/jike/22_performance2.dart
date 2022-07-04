@@ -4,21 +4,21 @@ import 'package:flutter/foundation.dart';
 import 'dart:async';
 
 import 'dart:ui';
-import '22_fps_calculate.dart';
-import '22_pv_exception.dart';
+import './22_fps_calculate.dart';
+import './22_pv_exception.dart';
 
-void main() async{
+void main() async {
   FlutterError.onError = (FlutterErrorDetails details) async {
     //将异常转发至Zone
-    Zone.current.handleUncaughtError(details.exception, details.stack);
+    Zone.current.handleUncaughtError(
+        details.exception, details.stack ?? StackTrace.empty);
   };
 
   runZoned<Future<Null>>(() async {
     runApp(const MyApp());
 
-
-    orginalCallback = window.onReportTimings;
-    window.onReportTimings = onReportTimings;
+    // originalCallback = window.onReportTimings;
+    // window.onReportTimings = onReportTimings;
 
   }, onError: (error, stackTrace) async {
     //拦截异常
@@ -36,23 +36,21 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-
       navigatorObservers: [
-        MyObserver(),
+        BaseObserver(),
       ],
-
-      home: PerformancePage(),
+      home: PerformancePage2(),
     );
   }
 }
 
-
 class PerformancePage2 extends StatefulWidget {
+  // 统一定义为不是const类似数据
   int startTime;
-  int endTime;
+  int endTime = 0;
 
-  const PerformancePage2({Key? key}) :
-        startTime = DateTime.now().millisecondsSinceEpoch,
+  PerformancePage2({Key? key})
+      : startTime = DateTime.now().millisecondsSinceEpoch,
         super(key: key);
 
   @override
@@ -60,14 +58,15 @@ class PerformancePage2 extends StatefulWidget {
 }
 
 class _PerformancePage2State extends State<PerformancePage2> {
+  int _counter = 0;
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
       widget.endTime = DateTime.now().millisecondsSinceEpoch;
       int timeSpend = widget.endTime - widget.startTime;
       print("PerformancePage2 render time:${timeSpend} ms");
-    })
+    });
   }
 
   void _incrementCounter() {
@@ -80,17 +79,42 @@ class _PerformancePage2State extends State<PerformancePage2> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("PerformancePage2"),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('You have pushed the button this many times:',),
+            Text(
+              'button click count:',
+            ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.displayMedium,
             ),
+
+
+            RaisedButton(
+              child: Text('Dart exception'),
+              elevation: 1.0,
+              onPressed: () {
+                throw StateError('This is a Dart exception.');
+              },
+            ),
+
+            new RaisedButton(
+              child: Text('async Dart exception'),
+              elevation: 1.0,
+              onPressed: () {
+                try {
+                  Future.delayed(Duration(seconds: 1)).then((e) =>
+                  throw StateError('This is a Dart exception in Future.'));
+                } catch (e) {
+                  print("This line will never be executed. ");
+                }
+              },
+            ),
+
           ],
         ),
       ),
@@ -101,5 +125,4 @@ class _PerformancePage2State extends State<PerformancePage2> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
-
 }

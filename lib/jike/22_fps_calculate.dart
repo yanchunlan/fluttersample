@@ -2,7 +2,7 @@ import 'dart:ui';
 
 
 
-var orginalCallback;
+var originalCallback;
 
 
 void onReportTimings(List<FrameTiming> timings) {
