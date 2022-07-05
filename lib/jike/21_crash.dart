@@ -28,7 +28,7 @@ void main() {
 }
 
 Future<Null> _reportError(dynamic error, dynamic stackTrace) async {
-  print('_reportError $error stackTrace $stackTrace');
+  print('_reportError $error \n stackTrace $stackTrace');
   Crash.postException(error, stackTrace);
 }
 

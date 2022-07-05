@@ -5,7 +5,7 @@ import 'package:flutter/scheduler.dart';
 var originalCallback;
 
 const maxFrames = 25;
-const List<FrameTiming> lastFrames = [];
+final List<FrameTiming> lastFrames = <FrameTiming>[];
 const frameInterval = const Duration(microseconds: Duration.microsecondsPerSecond ~/ 60);
 
 void startFpsListener() {

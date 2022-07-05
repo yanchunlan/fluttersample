@@ -7,7 +7,7 @@ int exceptionCount = 0;
 Future<Null> reportError(dynamic error, dynamic stackTrace) async {
   exceptionCount++; //累加异常次数
 
-  print('_reportError $error stackTrace $stackTrace');
+  print('_reportError $error \n stackTrace $stackTrace');
   // Crash.postException(error, stackTrace);
 }
 
