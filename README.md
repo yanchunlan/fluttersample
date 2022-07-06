@@ -10,12 +10,15 @@ flutter sample
 
 ## 目录介绍
 ```
-android_project_a 模块化分支
+android_project_a   android_a项目模块
 lib
 	-generated   多语言目录
 	-jike    极客demo
 	-l10n    多语言目录
 	-test    测试代码
-	-widget  测试代码
-module_a 模块化分支
+	-utils   工具类    
+	-widget  练习代码
+module      module模块
+module_a    module_a模块
+plugin      插件模块
 ```
