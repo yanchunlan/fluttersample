@@ -4,18 +4,14 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter_network_plugin/flutter_network_plugin.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class NetworkPage extends StatefulWidget {
+  const NetworkPage({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<NetworkPage> createState() => _NetworkPageState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _NetworkPageState extends State<NetworkPage> {
   String _platformVersion = 'Unknown';
 
   @override
@@ -54,9 +50,15 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: RaisedButton(
-            child: Text('Running on: $_platformVersion\n FlutterNetworkPlugin.doRequest'),
-            onPressed: () => FlutterNetworkPlugin.doRequest("https://jsonplaceholder.typicode.com/posts", {'userId':'2'}).then((s)=>print('Result:$s')),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Running on: $_platformVersion\n'),
+              RaisedButton(
+                child: Text('FlutterNetworkPlugin.doRequest'),
+                onPressed: () => FlutterNetworkPlugin.doRequest("https://jsonplaceholder.typicode.com/posts", {'userId':'2'}).then((s)=>print('Result:$s')),
+              ),
+            ],
           ),
         ),
       ),

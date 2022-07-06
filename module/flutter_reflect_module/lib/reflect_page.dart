@@ -2,20 +2,17 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:flutter_network_plugin/flutter_network_plugin.dart';
+import 'package:flutter_reflect_plugin/flutter_reflect_plugin.dart';
+import 'package:flutter/foundation.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
+class ReflectPage extends StatefulWidget {
+  const ReflectPage({Key? key}) : super(key: key);
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<ReflectPage> createState() => _ReflectPageState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _ReflectPageState extends State<ReflectPage> {
   String _platformVersion = 'Unknown';
 
   @override
@@ -31,7 +28,7 @@ class _MyAppState extends State<MyApp> {
     // We also handle the message potentially returning null.
     try {
       platformVersion =
-          await FlutterNetworkPlugin.platformVersion ?? 'Unknown platform version';
+          await FlutterReflectPlugin().platformVersion() ?? 'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -51,12 +48,24 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('ReflectPage'),
         ),
         body: Center(
-          child: RaisedButton(
-            child: Text('Running on: $_platformVersion\n FlutterNetworkPlugin.doRequest'),
-            onPressed: () => FlutterNetworkPlugin.doRequest("https://jsonplaceholder.typicode.com/posts", {'userId':'2'}).then((s)=>print('Result:$s')),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('Running on: $_platformVersion\n'),
+              RaisedButton(
+                child: Text('click openAppStore test Reflect'),
+                onPressed: () {
+                  if (defaultTargetPlatform == TargetPlatform.android) {
+                    FlutterReflectPlugin().openAppStore('com.tencent.mm');
+                  }else{
+                    FlutterReflectPlugin().openAppStore('414478124');
+                  }
+                },
+              )
+            ],
           ),
         ),
       ),

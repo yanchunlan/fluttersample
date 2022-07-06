@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_reflect_plugin/flutter_reflect_plugin.dart';
+import 'package:flutter/foundation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,7 +32,7 @@ class _MyAppState extends State<MyApp> {
     // We also handle the message potentially returning null.
     try {
       platformVersion =
-          await FlutterReflectPlugin.platformVersion ?? 'Unknown platform version';
+          await FlutterReflectPlugin().platformVersion() ?? 'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -54,7 +55,16 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: GestureDetector(
+            child: Text('Running on: $_platformVersion\n'),
+            onTap: () {
+                if (defaultTargetPlatform == TargetPlatform.android) {
+                  FlutterReflectPlugin().openAppStore('com.tencent.mm');
+                }else{
+                  FlutterReflectPlugin().openAppStore('414478124');
+                }
+            },
+          ),
         ),
       ),
     );

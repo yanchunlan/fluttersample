@@ -44,6 +44,7 @@ Widget jikeWidget() {
   // return ProviderPage();
   // return ScreenPage();
   return LogPage();
+  // return ModulePage();
 }
 
 Widget _test1() {

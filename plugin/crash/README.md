@@ -7,7 +7,8 @@
 dependencies:
   crash:
     git:
-      url: https://github.com/yanchunlan/fluttersample/plugin/crash.git
+      url: https://github.com/yanchunlan/fluttersample.git
+      path: packages/crash 
 ```
 
 配置Bugly App：

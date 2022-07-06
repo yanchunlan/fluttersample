@@ -27,4 +27,8 @@ class FlutterReflectPlugin {
     String string = symbol.toString();
     return string.substring(8, string.length - 2);
   }
+
+  Future<dynamic> platformVersion();
+
+  Future<dynamic> openAppStore(appId);
 }

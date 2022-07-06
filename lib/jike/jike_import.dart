@@ -27,4 +27,5 @@ export '18_screen.dart';
 export '20_log.dart';
 // export '21_crash.dart';
 // export '22_performance.dart';
+export '23_module.dart';
 

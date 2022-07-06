@@ -30,17 +30,26 @@ dependencies:
   provider: ^5.0.0
   convert: ^3.0.2
   crypto: ^3.0.2 # md5加密
-
   logger: ^1.1.0
   dog: ^1.4.0
 
-  # 建议bugly插件
-  crash:
-    path: ./plugin/crash
 
-  # 其他
-  # 系统通知插件
-  flutter_local_notifications: ^9.1.5
+  # 中台化，尽量使用 project -> module -> plugin ，其中module相当于flutter的中间层
+#  crash:
+#    path: ./plugin/crash
+  crash:
+    git:
+      url: https://github.com/yanchunlan/fluttersample.git
+      path: packages/crash
+
+  flutter_network_module:
+    path: ./module/flutter_network_module
+
+  flutter_reflect_module:
+    path: ./module/flutter_reflect_module
+
+
+  flutter_local_notifications: ^9.1.5 # 系统通知插件
 
 
 
