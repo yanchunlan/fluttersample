@@ -1,5 +1,6 @@
 {
   "app_title": "App标题",
   "main_title": "主标题",
-  "message_tip" : "点击按钮次数: {count}"
+  "message_tip" : "点击按钮次数: {count}",
+  "message_tip2" : "@@2122121212211212"
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/services.dart';
 
 class TimeUtils{
@@ -16,6 +18,18 @@ class TimeUtils{
   static Map<String,dynamic> timeRecord=new Map();
 
   static const MethodChannel mainMethodChannel = MethodChannel('example.native_method/navigation');
+
+  static void setMethodCallHandler(){
+    mainMethodChannel.setMethodCallHandler((MethodCall call){
+      Completer<dynamic> completer = Completer();
+      switch(call.method){
+        case "getFlutterInfo":
+          completer.complete(["flutter info test1","flutter info test2"]);
+          break;
+      }
+      return completer.future;
+    });
+  }
 
   static Future<Map<dynamic, dynamic>?> getStartTime() async {
     return await mainMethodChannel.invokeMethod<Map<dynamic, dynamic>>('getStartTime');

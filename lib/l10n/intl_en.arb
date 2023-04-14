@@ -1,5 +1,6 @@
 {
   "app_title": "app_title",
   "main_title": "My Main Title",
-  "message_tip" : "You have pushed the button many times: {count}"
+  "message_tip" : "You have pushed the button many times: {count}",
+  "message_tip2" : "@@2122121212211212"
 }

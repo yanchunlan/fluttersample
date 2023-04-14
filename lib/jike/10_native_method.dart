@@ -17,6 +17,7 @@ class NativeMethodLessWidget extends StatelessWidget {
           child: RaisedButton(
               child: Text("打开应用商店"),
               onPressed: () {
+                TimeUtils.setMethodCallHandler();
                 platform.invokeMethod('openAppStore');
                 testGetBool();
                 testGetTime();

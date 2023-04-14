@@ -24,7 +24,8 @@ class LanguageApp extends StatelessWidget {
       // localeResolutionCallback: (Locale? locale, Iterable<Locale> supportedLocales) {
       //   return locale;
       // },
-      // locale: ,
+      // 设置语言
+      // locale: S.delegate.supportedLocales.first,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -62,7 +63,7 @@ class _LanguagePageState extends State<LanguagePage> {
             children: <Widget>[
               Text(
                   S.current.message_tip(_counter)
-              )
+              ),
             ],
           )
       ),

@@ -79,6 +79,16 @@ class S {
       args: [count],
     );
   }
+
+  /// `@@2122121212211212`
+  String get message_tip2 {
+    return Intl.message(
+      '@@2122121212211212',
+      name: 'message_tip2',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -87,6 +97,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   List<Locale> get supportedLocales {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
+      Locale.fromSubtags(languageCode: 'ar'),
       Locale.fromSubtags(languageCode: 'zh'),
     ];
   }

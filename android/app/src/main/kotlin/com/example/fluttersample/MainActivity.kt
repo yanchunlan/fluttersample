@@ -5,8 +5,10 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import kotlin.random.Random
 import android.view.View
+import androidx.annotation.Nullable
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.embedding.engine.plugins.shim.ShimPluginRegistry
@@ -21,6 +23,10 @@ import io.flutter.plugins.GeneratedPluginRegistrant
 
 class MainActivity : FlutterActivity() {
 
+    private val TAG = "MainActivity"
+
+    lateinit var methodChannel: MethodChannel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         registerMethodChannel()
@@ -32,6 +38,30 @@ class MainActivity : FlutterActivity() {
         GeneratedPluginRegistrant.registerWith(flutterEngine)
     }
 
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause: ")
+
+        // 原生调用flutter代码
+        methodChannel.invokeMethod("getFlutterInfo", null, object : MethodChannel.Result {
+            override fun success(result: Any?) {
+                Log.d(TAG, "onPause: getFlutterInfo success $result")
+            }
+
+            override fun error(errorCode: String, errorMessage: String?, errorDetails: Any?) {
+                Log.d(TAG, "onPause: getFlutterInfo error $errorMessage")
+            }
+
+            override fun notImplemented() {
+                Log.d(TAG, "onPause: getFlutterInfo notImplemented")
+            }
+        })
+
+
+
+    }
+
+
     private fun registerMethodChannel1() {
         val registrar = ShimPluginRegistry(flutterEngine!!)
             .registrarFor("example.native_method/NativeViews")
@@ -42,10 +72,11 @@ class MainActivity : FlutterActivity() {
 
     // flutter 调用原生代码
     private fun registerMethodChannel() {
-        MethodChannel(
+        methodChannel = MethodChannel(
             flutterEngine?.dartExecutor,
             "example.native_method/navigation"
-        ).setMethodCallHandler { call, result ->
+        )
+        methodChannel.setMethodCallHandler { call, result ->
             if (call.method.equals("openAppStore")) {
                 try {
                     val uri = Uri.parse("market://details?id=com.tencent.mm")
