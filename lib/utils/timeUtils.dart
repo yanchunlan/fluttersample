@@ -37,4 +37,16 @@ class TimeUtils{
   static Future<dynamic> isStartUpPref() async {
     return await mainMethodChannel.invokeMethod<dynamic>('isStartUpPref');
   }
+
+
+
+  static const EventChannel _eventChannel = EventChannel('example.native_method.eventChannel/test');
+
+  static void eventChannelListener(){
+    //监听原生端发送过来的事件
+    _eventChannel.receiveBroadcastStream().listen((event){
+      print("TimeUtils.eventChannelListener event $event");
+    });
+  }
+
 }

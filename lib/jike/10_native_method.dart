@@ -10,6 +10,8 @@ class NativeMethodLessWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TimeUtils.eventChannelListener();
+
     return Scaffold(
       backgroundColor: Colors.yellowAccent,
       appBar: AppBar(title: Text("Default Page")),

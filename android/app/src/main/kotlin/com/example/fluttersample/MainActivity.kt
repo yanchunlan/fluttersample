@@ -6,19 +6,15 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import kotlin.random.Random
 import android.view.View
-import androidx.annotation.Nullable
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.embedding.engine.plugins.shim.ShimPluginRegistry
-import io.flutter.plugin.common.BinaryMessenger
-import io.flutter.plugin.common.MethodCall
-import io.flutter.plugin.common.MethodChannel
-import io.flutter.plugin.common.StandardMessageCodec
+import io.flutter.plugin.common.*
 import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
 import io.flutter.plugins.GeneratedPluginRegistrant
+import kotlin.random.Random
 
 
 class MainActivity : FlutterActivity() {
@@ -58,7 +54,17 @@ class MainActivity : FlutterActivity() {
         })
 
 
-
+        // 原生主动发送事件到flutter
+        var eventSink: EventChannel.EventSink? = null
+        val eventChannel = EventChannel(flutterEngine?.dartExecutor, "example.native_method.eventChannel/test")
+        eventChannel.setStreamHandler(object: EventChannel.StreamHandler {
+            override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
+                eventSink = events
+            }
+            override fun onCancel(arguments: Any?) {
+            }
+        })
+        eventSink?.success(100)
     }
 
 
