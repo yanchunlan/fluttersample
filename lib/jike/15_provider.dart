@@ -90,7 +90,7 @@ class ConsumerTabPage1 extends StatelessWidget {
                     style: TextStyle(fontSize: textSize))
             ),
             Consumer<CounterModel>(
-              builder: (_context, CounterModel counter, child) => RaisedButton(
+              builder: (_context, CounterModel counter, child) => MaterialButton(
                 onPressed: counter.addCounter,
                 child: child,
               ),
@@ -154,7 +154,7 @@ class ProviderTabPage1 extends StatelessWidget {
               'Counter: ${_counter.counter}',
               style: TextStyle(fontSize: textSize),
             ),
-            RaisedButton(
+            MaterialButton(
                 child: Icon(Icons.add),
                 onPressed: () => _counter.addCounter()),
           ],

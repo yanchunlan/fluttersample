@@ -122,7 +122,7 @@ class UpdatedItemWidget extends StatelessWidget {
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-            child: FlatButton(
+            child: MaterialButton(
               color: Color(0xFFF1F0F7),
               highlightColor: Colors.blue[700],
               colorBrightness: Brightness.dark,

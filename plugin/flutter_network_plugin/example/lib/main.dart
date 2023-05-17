@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: RaisedButton(
+          child: MaterialButton(
             child: Text('Running on: $_platformVersion\n FlutterNetworkPlugin.doRequest'),
             onPressed: () => FlutterNetworkPlugin.doRequest("https://jsonplaceholder.typicode.com/posts", {'userId':'2'}).then((s)=>print('Result:$s')),
           ),

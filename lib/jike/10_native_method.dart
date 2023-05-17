@@ -16,7 +16,7 @@ class NativeMethodLessWidget extends StatelessWidget {
       backgroundColor: Colors.yellowAccent,
       appBar: AppBar(title: Text("Default Page")),
       body: Center(
-          child: RaisedButton(
+          child: MaterialButton(
               child: Text("打开应用商店"),
               onPressed: () {
                 TimeUtils.setMethodCallHandler();

@@ -26,10 +26,10 @@ class PageA extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              RaisedButton(
+              MaterialButton(
                   child: Text("Go Native Page"),
                   onPressed: () => methodChannel.invokeMethod('openNativePage')),
-              RaisedButton(
+              MaterialButton(
                   child: Text("finish Page A"),
                   onPressed: () => Navigator.pop(context)),
             ],
@@ -62,12 +62,12 @@ class DefaultPage extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              RaisedButton(
+              MaterialButton(
                 child: Text("Go Page A"),
                 onPressed: () => Navigator.push(
                     context, MaterialPageRoute(builder: (context) => PageA())),
               ),
-              RaisedButton(
+              MaterialButton(
                 child: Text("finish flutter Act"),
                 onPressed: () => methodChannel.invokeMethod('closeFlutterPage'),
               ),

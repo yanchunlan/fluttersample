@@ -23,8 +23,8 @@ class _CustomProviderPageState extends State<CustomProviderPage> {
                 builder: (context, value) => Text("count ${value.count}")),
             Builder(
               builder: ((context) {
-                print("RaisedButton build");
-                return RaisedButton(
+                print("MaterialButton build");
+                return MaterialButton(
                   child: Text("add"),
                   onPressed: () => ModelProviderWidget.of<CountModel>(
                       context, listen: false).increment(),

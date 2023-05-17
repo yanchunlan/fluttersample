@@ -74,7 +74,7 @@ class PageA extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              RaisedButton(
+              MaterialButton(
                   child: Text("Go Native Page"),
                   onPressed: () => methodChannel.invokeMethod('openNativePage'))
             ],
@@ -108,7 +108,7 @@ class DefaultPage extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              RaisedButton(
+              MaterialButton(
                 child: Text("Go Page A"),
                 onPressed: () => Navigator.push(
                     context, MaterialPageRoute(builder: (context) => PageA())),

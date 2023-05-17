@@ -54,7 +54,7 @@ class _NetworkPageState extends State<NetworkPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('Running on: $_platformVersion\n'),
-              RaisedButton(
+              MaterialButton(
                 child: Text('FlutterNetworkPlugin.doRequest'),
                 onPressed: () => FlutterNetworkPlugin.doRequest("https://jsonplaceholder.typicode.com/posts", {'userId':'2'}).then((s)=>print('Result:$s')),
               ),

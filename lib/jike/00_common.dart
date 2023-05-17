@@ -38,11 +38,11 @@ class _CommonPageState extends State<CommonPage> {
     // );
 
     // return FlatButton(
-    //   onPressed: () => print('RaisedButton pressed'),
+    //   onPressed: () => print('MaterialButton pressed'),
     //   child: Text('Btn'),
     // );
 
-    return RaisedButton(
+    return MaterialButton(
       onPressed: () {
         print("点击了 button");
       },
@@ -84,7 +84,7 @@ class _CommonPageState extends State<CommonPage> {
     //   color: Colors.red,
     //   shape: BeveledRectangleBorder(borderRadius: BorderRadius.circular(10)),
     //   colorBrightness: Brightness.light,
-    //   onPressed: () => print('RaisedButton pressed'),
+    //   onPressed: () => print('MaterialButton pressed'),
     //   child: Row(
     //     // 满屏的列
     //     children: [

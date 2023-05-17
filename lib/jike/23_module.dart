@@ -22,7 +22,7 @@ class _ModulePageState extends State<ModulePage> {
           child: Column(
             children: [
 
-              RaisedButton(
+              MaterialButton(
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder:
@@ -33,7 +33,7 @@ class _ModulePageState extends State<ModulePage> {
                 child: Text("to NetworkPage"),
               ),
 
-              RaisedButton(
+              MaterialButton(
                 onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder:

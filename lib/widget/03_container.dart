@@ -90,7 +90,7 @@ class StackDemo extends StatelessWidget {
     double overflow = -(headSize - iconSize) / 2;
 
     return Stack(
-      overflow: Overflow.visible,
+      // overflow: Overflow.visible,
       alignment: AlignmentDirectional.center,
       children: [
         IgnorePointer(

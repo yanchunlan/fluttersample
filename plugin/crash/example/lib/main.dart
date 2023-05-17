@@ -87,7 +87,7 @@ class _MyAppState extends State<MyApp> {
           children: [
             Text('Running on: $_platformVersion\n'),
 
-            RaisedButton(
+            MaterialButton(
               child: Text('Dart exception'),
               elevation: 1.0,
               onPressed: () {
@@ -95,7 +95,7 @@ class _MyAppState extends State<MyApp> {
               },
             ),
 
-            RaisedButton(
+            MaterialButton(
               child: Text('async Dart exception'),
               elevation: 1.0,
               onPressed: () async {

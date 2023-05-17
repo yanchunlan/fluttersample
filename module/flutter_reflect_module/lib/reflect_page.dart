@@ -55,7 +55,7 @@ class _ReflectPageState extends State<ReflectPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('Running on: $_platformVersion\n'),
-              RaisedButton(
+              MaterialButton(
                 child: Text('click openAppStore test Reflect'),
                 onPressed: () {
                   if (defaultTargetPlatform == TargetPlatform.android) {

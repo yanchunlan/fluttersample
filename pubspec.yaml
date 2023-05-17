@@ -26,7 +26,7 @@ dependencies:
   json_annotation: 4.1.0
   path_provider: ^2.0.3
   shared_preferences: ^2.0.7
-  sqflite:
+  sqflite: 2.0.2
   provider: ^5.0.0
   convert: ^3.0.2
   crypto: ^3.0.2 # md5加密
@@ -49,7 +49,7 @@ dependencies:
     path: ./module/flutter_reflect_module
 
 
-  flutter_local_notifications: ^9.1.5 # 系统通知插件
+  flutter_local_notifications: 9.1.5 # 系统通知插件
 
 
 

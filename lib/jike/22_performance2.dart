@@ -98,14 +98,14 @@ class _PerformancePage2State extends State<PerformancePage2> {
             ),
             Text('pageException: ${pageException()}'),
 
-            RaisedButton(
+            MaterialButton(
               child: Text('Dart exception'),
               elevation: 1.0,
               onPressed: () {
                 throw StateError('This is a Dart exception.');
               },
             ),
-            new RaisedButton(
+            new MaterialButton(
               child: Text('async Dart exception'),
               elevation: 1.0,
               onPressed: () {

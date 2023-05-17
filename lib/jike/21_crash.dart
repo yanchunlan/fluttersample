@@ -103,14 +103,14 @@ class _CrashPageState extends State<CrashPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text('platformVersion $_platformVersion'),
-            RaisedButton(
+            MaterialButton(
               child: Text('Dart exception'),
               elevation: 1.0,
               onPressed: () {
                 throw StateError('This is a Dart exception.');
               },
             ),
-            new RaisedButton(
+            new MaterialButton(
               child: Text('async Dart exception'),
               elevation: 1.0,
               onPressed: () {

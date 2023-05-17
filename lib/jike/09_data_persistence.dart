@@ -25,15 +25,15 @@ class _PersistencePageState extends State<PersistencePage> {
       body: Center(
         child: Column(
           children: <Widget>[
-            RaisedButton(
+            MaterialButton(
               child: Text('文件 demo'),
               onPressed: () => fileDemo(),
             ),
-            RaisedButton(
+            MaterialButton(
               child: Text('SharedPreference demo'),
               onPressed: () => spDemo(),
             ),
-            RaisedButton(
+            MaterialButton(
               child: Text('数据库 demo'),
               onPressed: () => dbDemo(),
             )

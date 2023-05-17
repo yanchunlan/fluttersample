@@ -36,7 +36,7 @@ class _FirstPageRouterState extends State<FirstPageRouter> {
       ),
       body: Column(
         children: [
-          RaisedButton(
+          MaterialButton(
               child: Text('基本路由'),
               onPressed: () =>
                   Navigator.push(context,
@@ -45,11 +45,11 @@ class _FirstPageRouterState extends State<FirstPageRouter> {
                       )
                   )
           ),
-          RaisedButton(
+          MaterialButton(
               child: Text('命名路由'),
               onPressed: () => Navigator.pushNamed(context, "second_page")
           ),
-          RaisedButton(
+          MaterialButton(
               child: Text('命名路由（参数&回调）$_msg'),
               onPressed: ()=> Navigator.pushNamed(context, "third_page",arguments: "hi").then<String?>((msg) {
               setState(() {
@@ -57,7 +57,7 @@ class _FirstPageRouterState extends State<FirstPageRouter> {
               });
             }),
           ),
-          RaisedButton(
+          MaterialButton(
               child: Text('命名路由异常处理'),
               onPressed: () => Navigator.pushNamed(context,"unknown_page")
           ),
@@ -76,7 +76,7 @@ class SecondPageRouter extends StatelessWidget {
       appBar: AppBar(
         title: Text("SecondPage"),
       ),
-      body: RaisedButton(
+      body: MaterialButton(
           child: Text('Back to first screen'),
           onPressed: () => Navigator.pop(context)
       ),
@@ -93,7 +93,7 @@ class UnknownPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("UnknownPage"),
       ),
-      body: RaisedButton(
+      body: MaterialButton(
           child: Text('Back to first screen'),
           onPressed: () => Navigator.pop(context)
       ),
@@ -112,7 +112,7 @@ class ThirdPageRouter extends StatelessWidget {
       appBar: AppBar(
         title: Text("ThirdPage"),
       ),
-      body: RaisedButton(
+      body: MaterialButton(
           child: Text('Back to first screen $msg'),
           onPressed: () => Navigator.pop(context, "Hi")
       ),

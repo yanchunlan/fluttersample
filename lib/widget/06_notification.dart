@@ -21,7 +21,7 @@ class _NotificationPageState extends State<NotificationPage> {
         ),
         backgroundColor: Colors.lightBlue,
       ),
-      body: RaisedButton(
+      body: MaterialButton(
         onPressed: () {
           Future.delayed(Duration(seconds: 3), () {
             notification.send('title', 'body');

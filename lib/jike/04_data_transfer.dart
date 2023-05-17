@@ -117,7 +117,7 @@ class CustomChild extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RaisedButton(
+    return MaterialButton(
       onPressed: ()=>CustomNotification("Hi").dispatch(context),
       child: Text("dispatch"),
     );
@@ -207,7 +207,7 @@ class SecondPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Second Page"),),
-      body: RaisedButton(
+      body: MaterialButton(
           child: Text('Fire Event'),
           onPressed: ()=> eventBus.fire(CustomEvent("hello"))
       ),

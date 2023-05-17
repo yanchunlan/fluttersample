@@ -23,7 +23,7 @@ class _LogPageState extends State<LogPage> {
           child: Column(
             children: [
 
-              RaisedButton(
+              MaterialButton(
                 onPressed: () {
                   Log.init(true);
                   Log1.init(true);
@@ -32,7 +32,7 @@ class _LogPageState extends State<LogPage> {
                 child: Text("set Log.init(true)"),
               ),
 
-              RaisedButton(
+              MaterialButton(
                 onPressed: () {
                   Log.init(false);
                   Log1.init(false);
@@ -41,7 +41,7 @@ class _LogPageState extends State<LogPage> {
                 child: Text("set Log.init(false)"),
               ),
 
-              RaisedButton(
+              MaterialButton(
                 onPressed: () {
                   Log.d('test');
                   Log1.d('test');

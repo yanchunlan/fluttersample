@@ -136,7 +136,7 @@ class _ScrollControllerState extends State<ScrollControllerWidget> {
         children: <Widget>[
           Container(
             height: 40.0,
-            child: RaisedButton(
+            child: MaterialButton(
               onPressed: (isToTop
                   ? () {
                       if (isToTop) {

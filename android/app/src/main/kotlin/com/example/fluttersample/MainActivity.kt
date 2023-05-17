@@ -78,10 +78,12 @@ class MainActivity : FlutterActivity() {
 
     // flutter 调用原生代码
     private fun registerMethodChannel() {
-        methodChannel = MethodChannel(
-            flutterEngine?.dartExecutor,
-            "example.native_method/navigation"
-        )
+        val manager = flutterEngine?.dartExecutor?.binaryMessenger
+        if(manager != null){
+            methodChannel = MethodChannel(manager,
+                "example.native_method/navigation"
+            )
+        }
         methodChannel.setMethodCallHandler { call, result ->
             if (call.method.equals("openAppStore")) {
                 try {
@@ -118,13 +120,14 @@ class MainActivity : FlutterActivity() {
         messenger: BinaryMessenger?
     ) : PlatformView, MethodChannel.MethodCallHandler {
         var mView: View = View(context)
-        var methodChannel: MethodChannel
+        var methodChannel: MethodChannel? = null
 
         init {
             mView.setBackgroundColor(Color.rgb(255, 0, 0));
-
-            methodChannel = MethodChannel(messenger, "example.native_method/native_views_$viewId")
-            methodChannel.setMethodCallHandler(this)
+            if(messenger != null){
+                methodChannel = MethodChannel(messenger, "example.native_method/native_views_$viewId")
+            }
+            methodChannel?.setMethodCallHandler(this)
         }
 
         override fun getView(): View {
