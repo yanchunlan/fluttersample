@@ -12,6 +12,7 @@ flutter sample
 ```
 android_project_a   android_a项目模块
 lib
+	-generated   底层API实现绘制
 	-generated   多语言目录
 	-jike    极客demo
 	-l10n    多语言目录
