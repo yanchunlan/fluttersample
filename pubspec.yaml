@@ -32,7 +32,7 @@ dependencies:
   crypto: ^3.0.2 # md5加密
   logger: ^1.1.0
   dog: ^1.4.0
-
+  isolate: ^2.0.2
 
   # 中台化，尽量使用 project -> module -> plugin ，其中module相当于flutter的中间层
   crash:

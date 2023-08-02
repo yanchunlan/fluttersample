@@ -39,11 +39,11 @@ Widget jikeWidget() {
   // return AnimationPage();
   // return NetworkPage();
   // return PersistencePage();
-  // return NativeMethodLessWidget();
+  return NativeMethodLessWidget();
   // return NativeViewPage();
   // return ProviderPage();
   // return ScreenPage();
-  return LogPage();
+  // return LogPage();
   // return ModulePage();
 }
 

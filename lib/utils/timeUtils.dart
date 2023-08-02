@@ -49,4 +49,17 @@ class TimeUtils{
     });
   }
 
+  static const BasicMessageChannel<String> _basicMessageChannel = BasicMessageChannel('example.native_method.basicMessageChannel/test', StringCodec());
+  static void basicMessageChannelListener() async {
+    //监听原生端发送过来的事件
+    _basicMessageChannel.setMessageHandler((message){
+          return Future<String>(() {
+            print("TimeUtils.basicMessageChannelListener setMessageHandler $message");
+            return "basicMessageChannelListener setMessageHandler $message"; });
+    });
+    //向原生端发送消息
+    var r = await _basicMessageChannel.send("flutter BasicMessageChannel");
+    print("TimeUtils.basicMessageChannelListener send");
+  }
+
 }

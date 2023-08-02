@@ -11,6 +11,7 @@ class NativeMethodLessWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TimeUtils.eventChannelListener();
+    TimeUtils.basicMessageChannelListener();
 
     return Scaffold(
       backgroundColor: Colors.yellowAccent,

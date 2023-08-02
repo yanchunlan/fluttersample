@@ -14,6 +14,7 @@ import io.flutter.plugin.common.*
 import io.flutter.plugin.platform.PlatformView
 import io.flutter.plugin.platform.PlatformViewFactory
 import io.flutter.plugins.GeneratedPluginRegistrant
+import java.util.*
 import kotlin.random.Random
 
 
@@ -27,6 +28,8 @@ class MainActivity : FlutterActivity() {
         super.onCreate(savedInstanceState)
         registerMethodChannel()
         registerMethodChannel1()
+        registerEventChannel()
+        registerBasicMessageChannel()
     }
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
@@ -38,7 +41,7 @@ class MainActivity : FlutterActivity() {
         super.onPause()
         Log.d(TAG, "onPause: ")
 
-        // 原生调用flutter代码
+        // 1. methodChannel - 原生调用flutter代码
         methodChannel.invokeMethod("getFlutterInfo", null, object : MethodChannel.Result {
             override fun success(result: Any?) {
                 Log.d(TAG, "onPause: getFlutterInfo success $result")
@@ -54,9 +57,9 @@ class MainActivity : FlutterActivity() {
         })
 
 
-        // 原生主动发送事件到flutter
+        // 2. EventChannel - 原生主动发送事件到flutter
         var eventSink: EventChannel.EventSink? = null
-        val eventChannel = EventChannel(flutterEngine?.dartExecutor, "example.native_method.eventChannel/test")
+        val eventChannel = EventChannel(flutterEngine?.dartExecutor?.binaryMessenger, "example.native_method.eventChannel/test")
         eventChannel.setStreamHandler(object: EventChannel.StreamHandler {
             override fun onListen(arguments: Any?, events: EventChannel.EventSink?) {
                 eventSink = events
@@ -67,6 +70,21 @@ class MainActivity : FlutterActivity() {
         eventSink?.success(100)
     }
 
+    // 3. BasicMessageChannel - 原生调用flutter
+    private fun registerBasicMessageChannel() {
+        val manager = flutterEngine?.dartExecutor?.binaryMessenger
+        if(manager != null){
+            val messageChannel = BasicMessageChannel<String>(manager, "example.native_method.basicMessageChannel/test", StringCodec.INSTANCE);
+            messageChannel.send("BasicMessageChannelPlugin message test") { reply ->
+//                reply?.reply("BasicMessageChannel收到：") //可以通过reply进行回复
+                Log.d(TAG, "BasicMessageChannelPlugin reply BasicMessageChannel收到$reply")
+            }
+        }
+    }
+
+    private fun registerEventChannel() {
+
+    }
 
     private fun registerMethodChannel1() {
         val registrar = ShimPluginRegistry(flutterEngine!!)
@@ -76,7 +94,7 @@ class MainActivity : FlutterActivity() {
         registrar.platformViewRegistry().registerViewFactory("SampleView", playerViewFactory)
     }
 
-    // flutter 调用原生代码
+    // 1. methodChannel - flutter 调用原生代码
     private fun registerMethodChannel() {
         val manager = flutterEngine?.dartExecutor?.binaryMessenger
         if(manager != null){

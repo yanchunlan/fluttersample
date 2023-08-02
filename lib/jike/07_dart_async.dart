@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:isolate';
+import 'package:isolate/isolate.dart';
 
 void main() async {
   print(".......sample1.......");
@@ -23,9 +25,13 @@ void main() async {
   print(await asyncFactoriali(4));
   //await Future.delayed(const Duration(seconds: 1), () => print(".......sample9......."));
   //compute函数仅能在Flutter工程中使用
-  //print(await compute(syncFactorial, 4));
+  // print(await compute(syncFactorial, 4));
 
+  Future<LoadBalancer> loadBalancer = LoadBalancer.create(2, IsolateRunner.spawn);
+  final lb = await loadBalancer;
+  int res = await lb.run<int, int>(syncFactorial, 1);
 }
+
 
 
 sample1() {
