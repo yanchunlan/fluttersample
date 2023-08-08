@@ -49,6 +49,10 @@ dependencies:
     path: ./module/flutter_reflect_module
 
 
+  test_meta_data:
+    path: ./package/test_meta_data
+
+
   flutter_local_notifications: 9.1.5 # 系统通知插件
 
 
@@ -63,9 +67,10 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
-  build_runner: 2.1.1
+  build_runner: ^2.1.1
   json_serializable: 5.0.1
-
+  test_lint_plugin:
+    path: ./plugin/test_lint_plugin/
 
 flutter:
   uses-material-design: true
