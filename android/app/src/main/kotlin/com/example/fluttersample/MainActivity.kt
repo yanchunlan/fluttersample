@@ -18,7 +18,7 @@ import java.util.*
 import kotlin.random.Random
 
 
-class MainActivity : FlutterActivity() {
+class MainActivity : PreloadFlutterEngineActivity() {
 
     private val TAG = "MainActivity"
 

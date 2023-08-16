@@ -16,7 +16,7 @@ import 'package:test_lint_plugin/utils/map_utils.dart';
 import 'logger/log.dart';
 
 class MirrorPlugin extends ServerPlugin {
-  MirrorPlugin(ResourceProvider provider) : super(provider);
+  MirrorPlugin(ResourceProvider provider) : super(resourceProvider: provider);
 
   static const excludedFolders = ['.dart_tool/**'];
 
@@ -33,6 +33,7 @@ class MirrorPlugin extends ServerPlugin {
 
   @override
   bool isCompatibleWith(Version serverVersion) => true;
+
 
   @override
   void contentChanged(String path) {
