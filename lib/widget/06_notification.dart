@@ -53,7 +53,7 @@ class Notification {
     isInit = true;
 
     var android = const AndroidInitializationSettings("@mipmap/ic_launcher");
-    var ios = const IOSInitializationSettings();
+    var ios = const DarwinInitializationSettings();
 
     np.initialize(InitializationSettings(android: android, iOS: ios));
     print("NotificationPage init");
@@ -70,7 +70,7 @@ class Notification {
         importance: Importance.max,
         priority: Priority.high
     );
-    var iosDetails = const IOSNotificationDetails();
+    var iosDetails = const DarwinNotificationDetails();
     var details = NotificationDetails(
         android: androidDetails,
         iOS: iosDetails

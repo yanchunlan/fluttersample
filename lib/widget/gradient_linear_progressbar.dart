@@ -22,7 +22,7 @@ class GradientLinearProgressBar extends StatelessWidget {
     if (_colors == null) {
       Color color = Theme
           .of(context)
-          .accentColor;
+          .hoverColor;
       _colors = [color, color];
     }
     return CustomPaint(
